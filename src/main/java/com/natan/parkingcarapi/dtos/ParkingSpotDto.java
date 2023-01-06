@@ -1,47 +1,28 @@
-package com.natan.parkingcarapi.models;
+package com.natan.parkingcarapi.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.util.UUID;
+public class ParkingSpotDto {
 
-@Entity
-@Table(name = "TB_PARKING_SPOT")
-public class ParkingSpotModel implements Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID ui;
-    @Column(nullable = false, unique = true, length = 10)
+    @NotBlank
     private String parkingSpotNumber;
-    @Column(nullable = false, unique = true, length = 7)
+    @NotBlank
+    @Size(max = 7)
     private String licensePlateCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String brandCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String modelCar;
-    @Column(nullable = false, length = 70)
+    @NotBlank
     private String colorCar;
-    @Column(nullable = false)
-    private String registrationDate;
-    @Column(nullable = false, length = 130)
+
+    @NotBlank
     private String responsibleName;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String apartment;
-    @Column(nullable = false, length = 30)
+    @NotBlank
     private String block;
-
-    public UUID getUi() {
-        return ui;
-    }
-
-    public void setUi(UUID ui) {
-        this.ui = ui;
-    }
 
     public String getParkingSpotNumber() {
         return parkingSpotNumber;
@@ -81,14 +62,6 @@ public class ParkingSpotModel implements Serializable {
 
     public void setColorCar(String colorCar) {
         this.colorCar = colorCar;
-    }
-
-    public String getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(String registrationDate) {
-        this.registrationDate = registrationDate;
     }
 
     public String getResponsibleName() {
