@@ -2,10 +2,15 @@ package com.natan.parkingcarapi.services;
 
 import com.natan.parkingcarapi.models.ParkingSpotModel;
 import com.natan.parkingcarapi.repositories.ParkingSpotRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ParkingSpotService {
@@ -30,7 +35,16 @@ public class ParkingSpotService {
         return parkingSpotRepository.existsByApartmentAndBlock(apartment, block );
     }
 
-    public List<ParkingSpotModel> findAll() {
-        return parkingSpotRepository.findAll();
+    public Page <ParkingSpotModel> findAll( Pageable pageable ) {
+        return parkingSpotRepository.findAll( pageable );
+    }
+
+    public Optional<ParkingSpotModel>findById(UUID id) {
+       return parkingSpotRepository.findById(id);
+    }
+
+    @Transactional
+    public void delete( ParkingSpotModel parkingSpotModel ) {
+         parkingSpotRepository.delete( parkingSpotModel );
     }
 }
